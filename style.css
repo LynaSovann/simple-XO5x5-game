@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --box-size: 100px;
+  --ox-size: calc(var(--box-size) * 0.9);
+}
+
+.result-container {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, rgba(255, 0, 0, .9), rgba(0, 0, 255, .9));
+  position: fixed;
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.show {
+  z-index: 1;
+  display: flex;
+}
+
+.result-container h1 {
+  font-weight: bold;
+  color: white;
+}
+
+.result-container img {
+  width: 400px;
+  max-height: 500px;
+  min-height: 500px;
+  margin: 3.7rem 0;
+  object-fit: cover;
+}
+
+.result-container button {
+  padding: 10px;
+  font-size: 17px;
+  border: 2px solid black;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background .5s, color .5s, border-color .5s;
+}
+
+.result-container button:hover {
+  background: black;
+  color: white;
+  border-color: white;
+}
+
+.board {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(5, auto);
+  justify-items: center;
+  align-content: center;
+}
+
+.box {
+  width: var(--box-size);
+  height: var(--box-size);
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.box:nth-child(-n + 5) {
+  border-top: 4px solid black;
+}
+
+.box:nth-child(5n + 1) {
+  border-left: 4px solid black;
+}
+
+.box:nth-child(5n) {
+  border-right: 4px solid black;
+}
+
+.box:nth-child(n + 21) {
+  border-bottom: 4px solid black;
+}
+
+.box.x,
+.box.o {
+  cursor: no-drop;
+}
+
+.box.x,
+.box.o,
+.board.x .box:not(.x):not(.o):hover,
+.board.o .box:not(.x):not(.o):hover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box.x::before,
+.box.x::after {
+  background: red;
+}
+
+.box.o::after,
+.box.o::before {
+  background: blue;
+}
+
+.board.x .box:not(.x):not(.o),
+.board.x .box:not(.x):not(.o)::after,
+.board.x .box:not(.x):not(.o)::before {
+  transition: ease-in-out 1s;
+}
+
+.board.o .box:not(.x):not(.o):hover::before,
+.board.o .box:not(.x):not(.o):hover::after {
+  background: lightblue;
+  opacity: 0.5;
+}
+
+.board.x .box:not(.x):not(.o):hover::before,
+.board.x .box:not(.x):not(.o):hover::after {
+  background: lightpink;
+  opacity: 0.5;
+}
+
+.box.o::after,
+.box.o::before,
+.board.o .box:not(.x):not(.o):hover::after,
+.board.o .box:not(.x):not(.o):hover::before,
+.box.x::before,
+.box.x::after,
+.board.x .box:not(.x):not(.o):hover::before,
+.board.x .box:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.box.x::before,
+.board.x .box:not(.x):not(.o):hover::before {
+  width: calc(var(--ox-size) - 10px);
+  height: calc(var(--ox-size) - 10px);
+}
+
+.box.x::after,
+.board.x .box:not(.x):not(.o):hover::after {
+  background-image: url("./images/g-devit.jpg");
+}
+
+.box.o::after,
+.board.o .box:not(.x):not(.o):hover::after {
+  background-image: url("./images/vannda.jpg");
+}
+
+.box.o::before,
+.board.o .box:not(.x):not(.o):hover::before {
+  width: calc(var(--ox-size) - 10px);
+  height: calc(var(--ox-size) - 10px);
+}
+
+.box.o::after,
+.board.o .box:not(.x):not(.o):hover::after,
+.box.x::after,
+.board.x .box:not(.x):not(.o):hover::after {
+  width: calc(var(--ox-size) * 0.65);
+  height: calc(var(--ox-size) * 0.65);
+  background-position: center;
+  background-size: cover;
+}
